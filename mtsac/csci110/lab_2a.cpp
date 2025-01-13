@@ -38,7 +38,7 @@ The program should then display the amount of the discount (if any) and the tota
 using namespace std;
 
 // sells a package that retails for $99
-const int a_package_retail = 99;
+const int A_PACKAGE_RETAIL = 99;
 
 // Input variable
 int number_purchase;
@@ -47,8 +47,8 @@ double amount_discount, purchase_after_discount;
 
 // < 10, no discount
 double less_ten(int numbers) {
-    amount_discount = a_package_retail * numbers * 0;
-    purchase_after_discount = a_package_retail * numbers - amount_discount;
+    amount_discount = A_PACKAGE_RETAIL * numbers * 0;
+    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
     cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
     cout << "After discount, the price is: $" << purchase_after_discount << endl;
     return purchase_after_discount;
@@ -56,8 +56,8 @@ double less_ten(int numbers) {
 
 // 10 - 19, 20%
 double purchase_ten_to_nineteen(int numbers) {
-    amount_discount = a_package_retail * numbers * .2;
-    purchase_after_discount = a_package_retail * numbers - amount_discount;
+    amount_discount = A_PACKAGE_RETAIL * numbers * .2;
+    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
     cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
     cout << "After discount, the price is: $" << purchase_after_discount << endl;
     return purchase_after_discount;
@@ -65,8 +65,8 @@ double purchase_ten_to_nineteen(int numbers) {
 
 // 20 - 49, 30%
 double purchase_twenty_to_forty_nine(int numbers) {
-    amount_discount = a_package_retail * numbers * .3;
-    purchase_after_discount = a_package_retail * numbers - amount_discount;
+    amount_discount = A_PACKAGE_RETAIL * numbers * .3;
+    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
     cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
     cout << "After discount, the price is: $" << purchase_after_discount << endl;
     return purchase_after_discount;
@@ -74,8 +74,8 @@ double purchase_twenty_to_forty_nine(int numbers) {
 
 // 50 - 99, 40%
 double purchase_fifty_to_ninety_nine(int numbers) {
-    amount_discount = a_package_retail * numbers * .4;
-    purchase_after_discount = a_package_retail * numbers - amount_discount;
+    amount_discount = A_PACKAGE_RETAIL * numbers * .4;
+    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
     cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
     cout << "After discount, the price is: $" << purchase_after_discount << endl;
     return purchase_after_discount;
@@ -83,8 +83,8 @@ double purchase_fifty_to_ninety_nine(int numbers) {
 
 // > 100, 50%
 double purchase_over_one_hundred(int numbers) {
-    amount_discount = a_package_retail * numbers * .5;
-    purchase_after_discount = a_package_retail * numbers - amount_discount;
+    amount_discount = A_PACKAGE_RETAIL * numbers * .5;
+    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
     cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
     cout << "After discount, the price is: $" << purchase_after_discount << endl;
     return purchase_after_discount;
