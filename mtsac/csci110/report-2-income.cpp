@@ -43,10 +43,9 @@ double total_tax_return() {
     double tax_1 = 0;
     double tax_2 = 0;
 
-    double total_tax_paid;
     if (marital_status == "s") {
         // not meet $32,000 threshold, 10% tax
-        // Assert income is number
+        // No check input type
         if (income < RATE_SINGLE_LIMIT) {
             tax_1 = income * RATE_1;
         } else {
@@ -54,7 +53,6 @@ double total_tax_return() {
             tax_1 = RATE_SINGLE_LIMIT * RATE_1;
             tax_2 = (income - RATE_SINGLE_LIMIT) * RATE_2;
         }
-        total_tax_paid = tax_1 + tax_2;
     } else if (marital_status == "m") {
         if (income < RATE_MARRIED_LIMIT) {
             // not meet $ 64,000 threshold, 10% tax
@@ -64,11 +62,10 @@ double total_tax_return() {
             tax_1 = RATE_MARRIED_LIMIT * RATE_1;
             tax_2 = (income - RATE_MARRIED_LIMIT) * RATE_2;
         }
-        total_tax_paid = tax_1 + tax_2;
     } else {
         cout << "Invalid marital status." << endl;
     }
-    return total_tax_paid;
+    return tax_1 + tax_2;
 }
 
 
@@ -95,6 +92,9 @@ int main() {
         }
         if (total_tax_paid > 0) {
             cout << "The tax is $" << total_tax_paid << endl;
+        } else {
+            cout << "Please check your enter." << endl;
+            continue;
         }
     }
 
