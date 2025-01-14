@@ -24,17 +24,14 @@
 
 using namespace std;
 
+const double RATE_1 = 0.1;
+const double RATE_2 = 0.25;
 
-int main() {
+const double RATE_SINGLE_LIMIT = 32000;
+const double RATE_MARRIED_LIMIT = 64000;
 
-    const double RATE_1 = 0.1;
-    const double RATE_2 = 0.25;
 
-    const double RATE_SINGLE_LIMIT = 32000;
-    const double RATE_MARRIED_LIMIT = 64000;
-
-    double tax_1, tax_2;
-
+double total_tax_return() {
     cout << "Please enter s for single, m for married: ";
     string marital_status;
     cin >> marital_status;
@@ -42,6 +39,9 @@ int main() {
     double income;
     cout << "Please enter your income: ";
     cin >> income;
+
+    double tax_1 = 0;
+    double tax_2 = 0;
 
     double total_tax_paid;
     if (marital_status == "s") {
@@ -65,11 +65,39 @@ int main() {
             tax_2 = (income - RATE_MARRIED_LIMIT) * RATE_2;
         }
         total_tax_paid = tax_1 + tax_2;
-    } else
+    } else {
         cout << "Invalid marital status." << endl;
+    }
+    return total_tax_paid;
+}
 
-    if (total_tax_paid > 0)
-        cout << "The tax is $" << total_tax_paid << endl;
+
+int main() {
+
+    double total_tax_paid = 0;
+
+    while (true) {
+
+        if (total_tax_paid > 0) {
+            cout << "Do you want to continue (y/n)? ";
+            string ans;
+            cin >> ans;
+            if (ans != "y") {
+                cout << "Ok, you have done." << endl;
+                break;
+            } else {
+
+                total_tax_paid = total_tax_return();
+            }
+        } else {
+
+            total_tax_paid = total_tax_return();
+        }
+        if (total_tax_paid > 0) {
+            cout << "The tax is $" << total_tax_paid << endl;
+        }
+    }
+
 
     return 0;
 }
