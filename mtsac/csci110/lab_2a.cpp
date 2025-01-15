@@ -15,7 +15,7 @@ The program should then display the amount of the discount (if any) and the tota
  *
       Prolog
  * a. Program Description
-        By using a program to calculate the amount of the discount and the total amount of the purchase after the discount.
+        By using a program to calculate the discount of purchased software and the total prices after the discount for purchased software.
  * b. Author
         Genhai Yu
  * c. Date and time
@@ -33,84 +33,67 @@ The program should then display the amount of the discount (if any) and the tota
  */
 
 #include "iostream"
-#include "iomanip"
+#include <tuple>
 
 using namespace std;
 
 // sells a package that retails for $99
 const int A_PACKAGE_RETAIL = 99;
+const int NO_DISCOUNT = 0;
+const float DISCOUNT_2 = 0.2;
+const float DISCOUNT_3 = 0.3;
+const float DISCOUNT_4 = 0.4;
+const float DISCOUNT_5 = 0.5;
 
-// Input variable
-int number_purchase;
-// Display the amount discount of each purchase, and price after discount
-double amount_discount, purchase_after_discount;
 
-// < 10, no discount
-double less_ten(int numbers) {
-    amount_discount = A_PACKAGE_RETAIL * numbers * 0;
+pair<double, double> calculate_discount_purchase(int numbers, float rate) {
+    // Display the amount discount of each purchase, and price after discount
+    double amount_discount, purchase_after_discount;
+    amount_discount = A_PACKAGE_RETAIL * numbers * rate;
     purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
-    cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
-    cout << "After discount, the price is: $" << purchase_after_discount << endl;
-    return purchase_after_discount;
-}
-
-// 10 - 19, 20%
-double purchase_ten_to_nineteen(int numbers) {
-    amount_discount = A_PACKAGE_RETAIL * numbers * .2;
-    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
-    cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
-    cout << "After discount, the price is: $" << purchase_after_discount << endl;
-    return purchase_after_discount;
-}
-
-// 20 - 49, 30%
-double purchase_twenty_to_forty_nine(int numbers) {
-    amount_discount = A_PACKAGE_RETAIL * numbers * .3;
-    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
-    cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
-    cout << "After discount, the price is: $" << purchase_after_discount << endl;
-    return purchase_after_discount;
-}
-
-// 50 - 99, 40%
-double purchase_fifty_to_ninety_nine(int numbers) {
-    amount_discount = A_PACKAGE_RETAIL * numbers * .4;
-    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
-    cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
-    cout << "After discount, the price is: $" << purchase_after_discount << endl;
-    return purchase_after_discount;
-}
-
-// > 100, 50%
-double purchase_over_one_hundred(int numbers) {
-    amount_discount = A_PACKAGE_RETAIL * numbers * .5;
-    purchase_after_discount = A_PACKAGE_RETAIL * numbers - amount_discount;
-    cout << "You purchased " << numbers << " software, discount is: $" << amount_discount << endl;
-    cout << "After discount, the price is: $" << purchase_after_discount << endl;
-    return purchase_after_discount;
+    return make_pair(amount_discount, purchase_after_discount);
 }
 
 
 int main() {
 
-    cout << "Please enter the number of packages purchase: ";
-    cin >> number_purchase;
 
+    while (true) {
+        cout << "Please enter the number of packages purchase: ";
+        // Input variable
+        int numbers;
+        cin >> numbers;
 
-    if (number_purchase < 10 && number_purchase > 0)
-        less_ten(number_purchase);
-    else if (number_purchase >= 10 && number_purchase < 20)
-        purchase_ten_to_nineteen(number_purchase);
-    else if (number_purchase >= 20 && number_purchase < 50)
-        purchase_twenty_to_forty_nine(number_purchase);
-    else if (number_purchase >= 50 && number_purchase < 100)
-        purchase_fifty_to_ninety_nine(number_purchase);
-    else if (number_purchase >= 100)
-        purchase_over_one_hundred(number_purchase);
-    else
-        cout << "Sorry, the numbers you have entered did not match our system." << endl;
+        if (numbers > 0) {
+            pair<double, double> purchase_process;
+            if (numbers < 10) {
+                purchase_process = calculate_discount_purchase(numbers, NO_DISCOUNT);
+            } else if (numbers >= 10 && numbers < 20) {
+                purchase_process = calculate_discount_purchase(numbers, DISCOUNT_2);
+            } else if (numbers >= 20 && numbers < 50) {
+                purchase_process = calculate_discount_purchase(numbers, DISCOUNT_3);
+            } else if (numbers >= 50 && numbers < 100) {
+                purchase_process = calculate_discount_purchase(numbers, DISCOUNT_4);
+            } else if (numbers >= 100) {
+                purchase_process = calculate_discount_purchase(numbers, DISCOUNT_5);
+            }
 
+            cout << "You purchased " << numbers << " software, discount is: $" << purchase_process.first << endl;
+            cout << "After discount, the price is: $" << purchase_process.second << endl;
+
+            cout << "Do you want to continue (y/n)? ";
+            string ans;
+            cin >> ans;
+
+            if (ans != "y") {
+                cout << "Ok, you have done." << endl;
+                break;
+            }
+        } else {
+            cout << "Sorry, the numbers you have entered did not match our system." << endl;
+            continue;
+        }
+
+    }
     return 0;
 }
-
-
